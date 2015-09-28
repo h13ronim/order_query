@@ -108,7 +108,7 @@ module OrderQuery
 
       RAY_OP = {asc: '>'.freeze, desc: '<'.freeze}.freeze
       def where_ray(col, from, mode, strict = true)
-        ["#{col.column_name} #{RAY_OP[col.direction(mode == :before)]}#{'=' unless strict} ?".freeze, [from]]
+        ["#{col.having || col.column_name} #{RAY_OP[col.direction(mode == :before)]}#{'=' unless strict} ?".freeze, [from]]
       end
 
       WHERE_IDENTITY = [''.freeze, [].freeze].freeze
